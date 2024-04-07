@@ -1,0 +1,24 @@
+{
+  "name": "treashunt",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "start": "turbo start",
+    "postinstall": "turbo run generate",
+    "db:push": "turbo run db:push",
+    "db:seed": "turbo run db:seed --no-cache"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "latest"
+  },
+  "packageManager": "bun@1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "configs/*"
+  ]
+}

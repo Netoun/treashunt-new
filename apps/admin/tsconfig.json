@@ -1,0 +1,10 @@
+{
+  "extends": "@treashunt/typescript-config/tsconfig-react.json",
+  "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./app/*"],
+      "@/api/*": ["../api/src/*"],
+    }
+  }
+}

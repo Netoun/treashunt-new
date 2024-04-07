@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "outDir": "build",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "declaration": true
+  },
+  "exclude": ["../../node_modules", "./build"]
+}
