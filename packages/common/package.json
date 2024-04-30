@@ -1,0 +1,29 @@
+{
+  "name": "@treashunt/common",
+  "type": "module",
+
+  "scripts": {
+    "dev": "bun --watch run build.ts",
+    "build": "bun run build.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    "types": {
+      "default": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "utils": {
+      "default": "./dist/utils.js",
+      "types": "./dist/utils.d.ts"
+    }
+  },
+  "dependencies": {
+    "@treashunt/db": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
