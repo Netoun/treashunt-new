@@ -1,37 +1,42 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [".env"],
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"]    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "start": {
-      "dependsOn": ["^start"]
-    },
-    "db:migrate:deploy": {
-      "outputs": []
-    },
-    "db:migrate:dev": {
-      "outputs": []
-    },
-    "db:push": {
-      "outputs": []
-    },
-    "db:seed": {
-      "outputs": [],
-      "cache": false
-    },
-    "db:migrate:force": {
-      "outputs": []
-    },
-   "generate": {
-      "dependsOn": ["^generate"]
-    }
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"globalDependencies": [".env"],
+	"pipeline": {
+		"build": {
+			"dependsOn": ["^build"]
+		},
+		"lint": {
+			"dependsOn": ["^lint"]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+		"start": {
+			"dependsOn": ["^start"]
+		},
+		"db:migrate:deploy": {
+			"outputs": []
+		},
+		"db:migrate:dev": {
+			"outputs": []
+		},
+		"db:push": {
+			"outputs": []
+		},
+		"db:seed": {
+			"outputs": [],
+			"cache": false
+		},
+		"db:migrate:force": {
+			"outputs": []
+		},
+		"generate": {
+			"dependsOn": ["^generate"]
+		},
+		"typecheck": {
+			"dependsOn": ["^typecheck"]
+		},
+		"ui:add": {}
+	}
 }

@@ -5,14 +5,15 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start": "turbo start",
     "postinstall": "turbo run generate",
     "db:push": "turbo run db:push",
-    "db:seed": "turbo run db:seed --no-cache"
+    "db:seed": "turbo run db:seed --no-cache",
+    "ui:add": "bun run --cwd packages/ui bun run ui:add",
+    "typecheck": "turbo typecheck"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
+    "@biomejs/biome": "1.7.1",
     "turbo": "latest"
   },
   "packageManager": "bun@1.0.0",
@@ -20,5 +21,8 @@
     "apps/*",
     "packages/*",
     "configs/*"
-  ]
+  ],
+  "dependencies": {
+    "hono": "^4.2.8"
+  }
 }

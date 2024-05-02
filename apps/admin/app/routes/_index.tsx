@@ -1,27 +1,38 @@
-import type { MetaFunction } from "@remix-run/node"
-import { trpc } from "~/utils/trpc"
+import { Button } from "@/ui/components/atoms/button";
+import { Input } from "@/ui/components/atoms/input";
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  redirect,
+} from "@remix-run/node";
+import { getUser } from "~/modules/session.server";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix SPA" },
-    { name: "description", content: "Welcome to Remix (SPA Mode)!" },
-  ]
-}
+    { title: "Treashunt" },
+    {
+      name: "description",
+      content:
+        "Treashunt is a web application that allows you to create and play treasure hunts.",
+    },
+  ];
+};
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const user = await getUser(request);
+
+  if (user) {
+    return redirect("/dashboard");
+  }
+
+  return redirect("/login");
+};
 
 export default function Index() {
-  const { data: users, isLoading } = trpc.admin.getUsers.useQuery()
-
   return (
-    <div className="p-4">
-      {isLoading ? (
-        "Loading..."
-      ) : (
-        <ul>
-          {users?.map((user) => (
-            <li key={user.id}>{user.email}</li>
-          ))}
-        </ul>
-      )}
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+      <Button>Click me</Button>
+      <Input />
     </div>
-  )
+  );
 }
