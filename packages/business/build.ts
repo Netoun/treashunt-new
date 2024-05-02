@@ -20,6 +20,7 @@ const build = async () => {
   await Bun.build({
     entrypoints: ["./src/index.ts"],
     outdir: "./dist",
+    target: "node",
     plugins: [dts()],
   });
 };

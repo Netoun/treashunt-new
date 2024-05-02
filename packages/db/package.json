@@ -10,17 +10,7 @@
   "scripts": {
     "build": "bun run build.ts",
     "dev": "bun --watch run build.ts",
-    "db:migrate:deploy": "bun with-env prisma migrate deploy",
-    "db:migrate:dev": "bun with-env prisma migrate dev",
-    "db:push": "bun with-env prisma db push",
-    "db:seed": "bun with-env prisma db seed",
-    "db:migrate:force": "bun with-env prisma migrate reset --force",
-    "format": "bun with-env prisma format",
-    "generate": "bun with-env prisma generate",
-    "prebuild": "bun run generate",
-    "predev": "bun run generate",
-    "studio": "bun with-env prisma studio",
-    "with-env": "dotenv -e ../../.env --"
+    "generate": "bun prisma generate"
   },
   "prisma": {
     "seed": "bun src/seed.ts"

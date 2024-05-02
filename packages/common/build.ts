@@ -20,6 +20,7 @@ const build = async () => {
     entrypoints: ["./src/types.ts", "./src/utils.ts"],
     outdir: "./dist",
     plugins: [dts()],
+    target: "node",
     minify: process.env.NODE_ENV === "production",
   });
 };

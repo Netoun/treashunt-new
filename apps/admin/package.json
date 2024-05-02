@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "remix vite:dev",
+    "dev": "bunx --bun vite",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc --noEmit --project tsconfig.json"
   },

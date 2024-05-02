@@ -6,6 +6,7 @@
     "dev": "turbo dev",
     "start": "turbo start",
     "postinstall": "turbo run generate",
+    "generate": "turbo run generate",
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed --no-cache",
     "ui:add": "bun run --cwd packages/ui bun run ui:add",
@@ -19,8 +20,5 @@
     "turbo": "latest"
   },
   "packageManager": "bun@1.0.0",
-  "workspaces": ["apps/*", "packages/*", "configs/*"],
-  "dependencies": {
-    "hono": "^4.2.8"
-  }
+  "workspaces": ["apps/*", "packages/*", "configs/*"]
 }
