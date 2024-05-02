@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Cache turbo build setup
         uses: actions/cache@v4
@@ -23,18 +23,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
 
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+
       - name: Install project
-        uses: oven-sh/setup-bun@v1
-        with:
-          version: latest
-          run: bun install
+        run: bun install
+
       - name: Run typechecks
-        uses: oven-sh/setup-bun@v1
-        with:
-          version: latest
-          run: bun run typecheck
+        run: bun run typecheck
+        
       - name: Run build
-        uses: oven-sh/setup-bun@v1
-        with:
-          version: latest
-          run: bun run build
+        run: bun run build

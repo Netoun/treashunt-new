@@ -4,24 +4,22 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
     "start": "turbo start",
     "postinstall": "turbo run generate",
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed --no-cache",
     "ui:add": "bun run --cwd packages/ui bun run ui:add",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "lint": "bunx @biomejs/biome lint --apply .",
+    "format": "bunx @biomejs/biome format --write .",
+    "check": "bunx @biomejs/biome format ."
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.1",
     "turbo": "latest"
   },
   "packageManager": "bun@1.0.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "configs/*"
-  ],
+  "workspaces": ["apps/*", "packages/*", "configs/*"],
   "dependencies": {
     "hono": "^4.2.8"
   }

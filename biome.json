@@ -3,6 +3,9 @@
   "organizeImports": {
     "enabled": true
   },
+  "files": {
+    "ignore": ["dist/*.js", "node_modules", "build/*.js", ".vscode/"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
