@@ -8,7 +8,7 @@ const themeSchema = z.object({
 
 export const action: LoaderFunction = async ({ request }) => {
   const formPayload = Object.fromEntries(await request.formData());
-  
+
   try {
     const fields = themeSchema.parse(formPayload);
     const userPrefs = getCookieUserPrefs(request);

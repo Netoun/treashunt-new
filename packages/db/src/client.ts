@@ -1,7 +1,6 @@
-import { Prisma, PrismaClient } from "@prisma/client"
+import { Prisma, PrismaClient } from "@prisma/client";
 
-export const prisma = new PrismaClient()
+export const prisma = new PrismaClient();
 export const { PrismaClientValidationError, PrismaClientKnownRequestError } =
-  Prisma
-export type * from "@prisma/client"
-
+  Prisma;
+export type * from "@prisma/client";

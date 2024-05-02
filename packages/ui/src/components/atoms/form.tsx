@@ -2,8 +2,8 @@ import type * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 
-import { Label } from "@/components/atoms/label";
-import { cn } from "@/lib/utils";
+import { Label } from "@/ui/components/atoms/label";
+import { cn } from "@/ui/lib/utils";
 import type { FieldMetadata } from "@conform-to/react";
 
 const useFormField = () => {

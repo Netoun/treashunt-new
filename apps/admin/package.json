@@ -7,7 +7,6 @@
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "start": "remix-serve ./build/server/index.js",
-    "lint": "bunx @biomejs/biome lint --apply ./app",
     "typecheck": "tsc --noEmit --project tsconfig.json"
   },
   "dependencies": {

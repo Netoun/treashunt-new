@@ -1,4 +1,4 @@
-import { useHydrated } from "@/lib/hooks/use-hydrated";
+import { useHydrated } from "@/ui/lib/hooks/use-hydrated";
 import type * as React from "react";
 
 type Props = {

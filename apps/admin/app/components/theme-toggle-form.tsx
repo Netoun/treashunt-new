@@ -11,7 +11,11 @@ export const ThemeToogleForm = ({ colorScheme }: ThemeToogleFormProps) => {
   const fetcher = useFetcher();
 
   return (
-    <fetcher.Form id="theme-switcher-form" method="post" action="/app/set-theme">
+    <fetcher.Form
+      id="theme-switcher-form"
+      method="post"
+      action="/app/set-theme"
+    >
       <Button
         variant="ghost"
         type="submit"

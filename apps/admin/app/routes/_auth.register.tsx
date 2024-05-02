@@ -109,7 +109,10 @@ export default function AuthRegisterRoute() {
               <strong>{fetcher.data.user.email}</strong>
             </p>
           </div>
-          <Link to="/login" className="inline-flex justify-center items-center underline text-center">
+          <Link
+            to="/login"
+            className="inline-flex justify-center items-center underline text-center"
+          >
             <ArrowLeftIcon className="inline-block size-4 mr-2" />
             Login
           </Link>

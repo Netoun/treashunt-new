@@ -19,9 +19,9 @@ const cleanDB = async () => {
         email: {
           not: {
             contains: "craftzoo",
-          }
+          },
         },
-      }
+      },
     });
     await db.scenario.deleteMany({});
   } catch (e) {
@@ -43,21 +43,23 @@ const seed = async () => {
         email,
       },
     });
-    const user = existingUser ? existingUser : await db.user.create({
-      data: {
-        email,
-        password: {
-          create: {
-            hash: hashedPassword,
+    const user = existingUser
+      ? existingUser
+      : await db.user.create({
+          data: {
+            email,
+            password: {
+              create: {
+                hash: hashedPassword,
+              },
+            },
+            signupToken: {
+              create: {
+                verifiedAt: new Date(),
+              },
+            },
           },
-        },
-        signupToken: {
-          create: {
-            verifiedAt: new Date(),
-          },
-        },
-      },
-    });
+        });
 
     const scenarios = await Promise.all(
       Array(10)
@@ -76,10 +78,9 @@ const seed = async () => {
             },
           });
         }),
-    )
+    );
 
     console.log(scenarios);
-    
   } catch (e) {
     console.error(e);
   }

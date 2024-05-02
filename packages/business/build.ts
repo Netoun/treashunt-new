@@ -1,19 +1,10 @@
-// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 import { watch } from "fs";
 import { parseArgs } from "util";
 import dts from "bun-plugin-dts";
 
-const { values } = parseArgs({
-  args: Bun.argv,
-  options: {
-    watch: {
-      type: "boolean",
-    },
-  },
-  allowPositionals: true,
-});
+const watchOption = Bun.argv.find((arg) => arg === "--watch");
 
-if (values.watch) {
+if (watchOption) {
   const watcher = watch(
     `${import.meta.dir}/src`,
     { recursive: true },

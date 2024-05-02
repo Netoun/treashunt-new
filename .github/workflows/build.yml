@@ -24,13 +24,13 @@ jobs:
             ${{ runner.os }}-turbo-
 
       - name: Install bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v1.2.1
 
       - name: Install project
         run: bun install
 
-      - name: Run typechecks
-        run: bun run typecheck
-        
       - name: Run build
         run: bun run build
+
+      - name: Run typecheck
+        run: bun run typecheck
