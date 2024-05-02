@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  password  Password?
+
+  scenarios Scenario[]
+
+  resetPasswordToken ResetPasswordToken[]
+  signupToken        SignupToken?
+}
+
+model ResetPasswordToken {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SignupToken {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  verifiedAt DateTime?
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Password {
+  hash      String
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Scenario {
+  id          String   @id @unique @default(cuid())
+  name        String
+  slug        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  games   Game[]
+  puzzles Puzzle[]
+
+  authorId String?
+  author   User?   @relation(fields: [authorId], references: [id])
+
+  mediaId String?
+  media   Media?  @relation(fields: [mediaId], references: [id])
+
+  defaultCoordinates Coordinates?
+
+  @@unique([slug, authorId])
+}
+
+model Puzzle {
+  id       String  @id @default(uuid())
+  slug     String  @unique
+  title    String
+  subtitle String?
+  content  String
+
+  note String?
+
+  answer String?
+  hidden Boolean?
+
+  ratingScan   Int @default(1)
+  ratingAnswer Int @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  coordinates Coordinates?
+
+
+  scenarioId String
+  scenario   Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+
+  mediaId String?
+  media   Media?  @relation(fields: [mediaId], references: [id])
+}
+
+model Coordinates {
+  id       String  @id @default(uuid())
+  lat      Float
+  lng      Float
+  puzzleId String? @unique
+  puzzle   Puzzle? @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
+
+  scenarioId String?   @unique
+  scenario   Scenario? @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+}
+
+model Game {
+  id         String        @id @default(cuid())
+  name       String
+  
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  startedAt  DateTime?
+  endAt      DateTime?
+
+  scenarioId String
+  scenario   Scenario      @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+ 
+  teams      Team[]
+  gamePuzzle Game_Puzzle[]
+}
+
+model Game_Puzzle {
+  id                    String              @id @default(uuid())
+  gameId                String
+  slug                  String
+  game                  Game                @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  puzzleData            Json
+  puzzlesScannedByTeams Game_Puzzle__Team[]
+
+  @@unique([gameId, slug])
+}
+
+model Team {
+  id             String              @id @default(cuid())
+  code           String              @unique
+  slug           String
+  color          String              @default("#000")
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  gameId         String
+  name           String
+  puzzlesScanned Game_Puzzle__Team[]
+  game           Game                @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([slug, gameId])
+}
+
+model Game_Puzzle__Team {
+  id                   String                    @id @default(uuid())
+  teamId               String
+  scannedAt            DateTime                  @default(now())
+  team                 Team                      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  gamePuzzleId         String
+  gamePuzzle           Game_Puzzle               @relation(fields: [gamePuzzleId], references: [id], onDelete: Cascade)
+  gamePuzzleTeamAnswer Game_Puzzle__Team_Answer?
+
+  @@unique([teamId, gamePuzzleId])
+}
+
+model Game_Puzzle__Team_Answer {
+  id        String   @id @default(uuid())
+  content   String
+  isCorrect Boolean?
+
+  gamePuzzleTeamId String
+  gamePuzzleTeam   Game_Puzzle__Team @relation(fields: [gamePuzzleTeamId], references: [id], onDelete: Cascade)
+
+  @@unique([gamePuzzleTeamId])
+}
+
+model Media {
+  id                   String                 @id @default(uuid())
+  name                 String
+  url                  String
+  puzzles              Puzzle[]
+  Scenario             Scenario[]
+}
+
+enum Role {
+  Admin
+  Reader
+}
+
