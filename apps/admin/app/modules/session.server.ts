@@ -74,6 +74,7 @@ type LoginParams = {
 
 export const login = async ({ email, password }: LoginParams) => {
   const user = await adminService.getUserWithPasswordByEmail(email);
+  
   if (!user?.password) return null;
 
   const isCorrectPassword = await bcrypt.compare(password, user.password.hash);

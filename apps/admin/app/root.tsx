@@ -103,13 +103,7 @@ export function ErrorBoundary() {
           <div className="flex h-[100dvh] flex-col items-center justify-center bg-gray-100 px-4 dark:bg-gray-950">
             <div className="container mx-auto max-w-md space-y-6 text-center">
               <div className="relative h-[300px] w-full max-w-[400px]">
-                <img
-                  alt="Lost astronaut"
-                  className="aspect-[4/3] w-full rounded-lg object-cover"
-                  height="300"
-                  src="/placeholder.svg"
-                  width="400"
-                />
+             
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float">
                   <RocketIcon className="h-20 w-20 text-gray-500 dark:text-gray-400" />
                 </div>

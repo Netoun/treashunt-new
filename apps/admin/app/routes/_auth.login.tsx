@@ -6,12 +6,17 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, json, useActionData, useFetcher } from "@remix-run/react";
+import { LoaderCircleIcon } from "lucide-react";
 import { z } from "zod";
 import { createUserSession, login } from "~/modules/session.server";
 
 const schema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string({
+    message: "Please enter a valid email address",
+  }),
+  password: z.string({
+    message: "Please enter a password",
+  }),
 });
 
 export const meta: MetaFunction = () => {
@@ -30,6 +35,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const user = await login(submission.value);
 
   if (!user) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return json("Invalid email or password", { status: 401 });
   }
 
@@ -95,6 +101,9 @@ export default function Login() {
         </FormItem>
         <Button type="submit" className="w-full">
           Login
+          {fetcher.state === "loading" || fetcher.state === "submitting" ? (
+            <LoaderCircleIcon className="ml-2 animate-spin size-4" />
+          ) : null}
         </Button>
         <Button variant="outline" className="w-full">
           Login with Google
