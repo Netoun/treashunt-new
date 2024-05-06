@@ -16,7 +16,7 @@
     "check": "bunx @biomejs/biome format ."
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.1",
+    "@biomejs/biome": "1.7.3",
     "turbo": "latest"
   },
   "packageManager": "bun@1.0.0",
